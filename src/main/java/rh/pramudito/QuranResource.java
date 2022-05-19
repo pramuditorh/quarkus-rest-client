@@ -1,25 +1,29 @@
 package rh.pramudito;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
-import rh.pramudito.data.Currency;
-import rh.pramudito.data.Quran;
+import rh.pramudito.data.Chapter;
+import rh.pramudito.data.Chapters;
 import rh.pramudito.service.QuranAPIClient;
-import rh.pramudito.service.TickerAPIClient;
 
-import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.Collection;
 
-@Path("/crypto")
+@Path("/quran")
 public class QuranResource {
 
     @RestClient
-    TickerAPIClient tickerAPIClient;
+    QuranAPIClient quranAPIClient;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Collection<Currency> getCrypto(@QueryParam("id") String id) {
-        return tickerAPIClient.getCurrency(id);
+    public Chapters getChapter(@QueryParam("id") String id) {
+        return quranAPIClient.getQuranChapters();
+    }
+
+    @GET
+    @Path("/{id}")
+    @Produces
+    public Chapter getQuran(@PathParam("id") int id) {
+        return quranAPIClient.getQuran(id);
     }
 }

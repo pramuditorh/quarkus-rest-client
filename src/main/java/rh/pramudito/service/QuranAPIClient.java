@@ -2,11 +2,11 @@ package rh.pramudito.service;
 
 import io.quarkus.rest.client.reactive.ClientExceptionMapper;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
-import rh.pramudito.data.Quran;
+import rh.pramudito.data.Chapter;
+import rh.pramudito.data.Chapters;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.Collection;
 
 @RegisterRestClient(baseUri = "https://api.quran.com/api/v4")
 @Path("chapters")
@@ -14,7 +14,11 @@ import java.util.Collection;
 public interface QuranAPIClient {
 
     @GET
-    Quran getQuranChapters();
+    Chapters getQuranChapters();
+
+    @GET
+    @Path("/{id}")
+    Chapter getQuran(@PathParam("id") int id);
 
     @ClientExceptionMapper
     static RuntimeException toException(javax.ws.rs.core.Response response) {
