@@ -13,12 +13,12 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public interface QuranAPIClient {
 
-    @GET
+    @DELETE
     Chapters getQuranChapters();
 
-    @GET
-    @Path("/{id}")
-    Chapter getQuran(@PathParam("id") int id);
+//    @GET
+//    @Path("/{id}")
+//    Chapter getQuran(@PathParam("id") int id);
 
     @ClientExceptionMapper
     static RuntimeException toException(javax.ws.rs.core.Response response) {
